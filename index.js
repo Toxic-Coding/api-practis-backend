@@ -27,7 +27,7 @@ app.use(
     store: store,
     cookie: {
       secure: true,
-      httpOnly: true,
+      // httpOnly: true,
       maxAge: 3600000, // 1 hour
       // sameSite: true,
     },
