@@ -29,11 +29,12 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      secure: true,
-      httpOnly: true,
+      httpOnly: false,
+      secure: false,
       maxAge: 3600000, // 1 hour
+      domain: "toxic-coding.github.io",
+      path: "/api-practise",
       sameSite: "none",
-      domain: ".github.io",
     },
   })
 );
