@@ -29,8 +29,8 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: true,
-      maxAge: 3600000, // 1 hour
-      domain: "toxic-coding.github.io",
+      domain: "github.io",
+      maxAge: 3600000,
       sameSite: "none",
     },
   })
