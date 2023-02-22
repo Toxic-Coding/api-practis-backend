@@ -29,7 +29,7 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      httpOnly: false,
+      httpOnly: true,
       secure: false,
       maxAge: 3600000, // 1 hour
       domain: "toxic-coding.github.io",
