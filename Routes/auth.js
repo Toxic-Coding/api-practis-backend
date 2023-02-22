@@ -109,14 +109,12 @@ router.post(
         },
       };
 
-      let authtoken = jwt.sign(data, JWT_SECRET);
       req.session.user = user;
-      req.session.save();
       // console.log(req.session);
       res.status(200).json({ message: "login success", session: req.session });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send({ error: error.message });
     }
   }
 );
