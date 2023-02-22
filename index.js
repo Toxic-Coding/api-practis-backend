@@ -3,7 +3,7 @@ const connectDb = require("./db");
 /* Importing the express module. */
 const express = require("express");
 /* Allowing the client to access the server. */
-const cors = require("cors");
+// const cors = require("cors");
 const session = require("express-session");
 // const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -11,7 +11,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const app = express();
 
 /* Allowing the client to access the server. */
-app.use(cors());
+// app.use(cors());
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
