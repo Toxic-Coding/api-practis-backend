@@ -11,7 +11,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const app = express();
 
 /* Allowing the client to access the server. */
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: "https://toxic-coding.github.io/api-practise", credentials: true }));
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
