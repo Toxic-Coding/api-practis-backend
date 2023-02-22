@@ -20,8 +20,6 @@ const store = new MongoDBStore({
 });
 //sessions
 // Set up the Express app and session middleware
-app.set("trust proxy", 1);
-
 app.use(
   session({
     secret: "mysecretkey",
@@ -29,11 +27,10 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
+      secure: true,
       httpOnly: true,
-      secure: false,
       maxAge: 3600000, // 1 hour
       domain: "toxic-coding.github.io",
-      path: "/api-practise",
       sameSite: "none",
     },
   })
