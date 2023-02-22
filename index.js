@@ -12,7 +12,7 @@ require("dotenv").config();
 const app = express();
 
 /* Allowing the client to access the server. */
-app.use(cors({ origin: "https://toxic-coding.github.io" }));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
@@ -31,7 +31,7 @@ app.use(
       httpOnly: true,
       domain: "github.io",
       maxAge: 3600000,
-      sameSite: "none",
+      // sameSite: "none",
     },
   })
 );
