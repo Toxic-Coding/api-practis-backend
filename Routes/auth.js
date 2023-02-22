@@ -103,11 +103,7 @@ router.post(
           .json({ error: "Please try to login with correct credentials" });
       }
 
-      let data = {
-        user: {
-          id: user.id,
-        },
-      };
+      console.log(user);
 
       req.session.user = user;
       // console.log(req.session);
