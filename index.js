@@ -31,7 +31,7 @@ app.use(
       httpOnly: true,
       domain: "github.io",
       maxAge: 3600000,
-      // sameSite: "none",
+      sameSite: true,
     },
   })
 );
