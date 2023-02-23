@@ -11,6 +11,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
 /* Creating an instance of the express application. */
 const app = express();
+app.set("trust proxy", 1);
 
 // Allow requests from your React app
 app.use(
@@ -29,13 +30,14 @@ app.use(cookieParser());
 // Set up the Express app and session middleware
 app.use(
   session({
-    secret: "mysecretkey",
+    secret: "your secret key here",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: store,
     cookie: {
-      httpOnly: true,
-      maxAge: 3600000,
+      secure: true, // set to true if your app is hosted on HTTPS
+      sameSite: "none", // set to 'none' if your app is hosted on a different domain
+      maxAge: 3600000, // session expiration time in milliseconds
     },
   })
 );
