@@ -54,7 +54,7 @@ app.use("/api/auth", require("./Routes/auth"));
 
 /* Listening to the port 4000. */
 app.listen(port, () => {
-  console.log(`live on http://localhost:${port}`);
+  console.log(port);
 });
 
 /* Connecting to the database. */
