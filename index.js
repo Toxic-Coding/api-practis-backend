@@ -41,11 +41,22 @@ app.use(
     },
   })
 );
-// app.use((req, res, next) => {
-//   console.log(req.session);
-//   next();
-// });
-/* Setting the port to 4000. */
+// Middleware to check if the session has expired
+app.use((req, res, next) => {
+  if (
+    req.session.lastActivity &&
+    Date.now() - req.session.lastActivity > 30000
+  ) {
+    // Regenerate the session ID
+    req.session.regenerate((err) => {
+      if (err) console.log(err);
+    });
+  }
+  // Update the last activity timestamp
+  req.session.lastActivity = Date.now();
+  next();
+});
+
 const port = 5000;
 
 /* A middleware that parses the body of the request. */
