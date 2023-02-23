@@ -37,25 +37,10 @@ app.use(
     cookie: {
       secure: true, // set to true if your app is hosted on HTTPS
       sameSite: "none", // set to 'none' if your app is hosted on a different domain
-      maxAge: 30000, // session expiration time in milliseconds
+      maxAge: 86400000, // session expiration time in milliseconds
     },
   })
 );
-// Middleware to check if the session has expired
-app.use((req, res, next) => {
-  if (
-    req.session.lastActivity &&
-    Date.now() - req.session.lastActivity > 30000
-  ) {
-    // Regenerate the session ID
-    req.session.regenerate((err) => {
-      if (err) console.log(err);
-    });
-  }
-  // Update the last activity timestamp
-  req.session.lastActivity = Date.now();
-  next();
-});
 app.use((req, res, next) => {
   res.setHeader("Permissions-Policy", "interest-cohort=()");
   next();
