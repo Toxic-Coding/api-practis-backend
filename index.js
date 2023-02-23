@@ -15,7 +15,7 @@ const app = express();
 // Allow requests from your React app
 app.use(
   cors({
-    origin: ["https://toxic-coding.github.io", "http://localhost:3000"],
+    origin: "https://toxic-coding.github.io",
     credentials: true,
   })
 );
@@ -35,21 +35,12 @@ app.use(
     store: store,
     cookie: {
       httpOnly: true,
+      secure: true,
       maxAge: 3600000,
     },
   })
 );
 
-app.use(function (req, res, next) {
-  if (req.secure) {
-    // request was made over HTTPS, set secure flag to true
-    req.session.cookie.secure = true;
-  } else {
-    // request was made over HTTP, set secure flag to false
-    req.session.cookie.secure = false;
-  }
-  next();
-});
 // app.use((req, res, next) => {
 //   console.log(req.session);
 //   next();
