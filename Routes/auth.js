@@ -75,33 +75,45 @@ router.post(
 );
 
 /* This is a route that is used to login the user. */
-router.post("/login", async (req, res) => {
-  let { email, password } = req.body;
-  try {
-    let user = await User.findOne({ email });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ error: "Please try to login with correct credentials" });
+router.post(
+  "/login",
+  [
+    body("email", "inter a valid email").isEmail(),
+    body("password", "password can't be blank").exists(),
+  ],
+  async (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    let configpass = await bcrypt.compare(password, user.password);
-    if (!configpass) {
-      return res
-        .status(400)
-        .json({ error: "Please try to login with correct credentials" });
+    let { email, password } = req.body;
+    try {
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials" });
+      }
+
+      let configpass = await bcrypt.compare(password, user.password);
+      if (!configpass) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials" });
+      }
+
+      console.log(user);
+
+      req.session.user = user;
+      // console.log(req.session);
+      res.status(200).json({ message: "login success", session: req.session });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send({ error: error.message });
     }
-
-    console.log(user);
-
-    req.session.user = user;
-    // console.log(req.session);
-    res.status(200).json({ message: "login success", session: req.session });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send({ error: error.message });
   }
-});
+);
 
 /* This is a route that is used to get the user profile. */
 router.get("/profile", fetchusers, async (req, res) => {
