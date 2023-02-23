@@ -34,12 +34,13 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      secure: true,
       httpOnly: true,
+      secure: true,
       maxAge: 3600000,
     },
   })
 );
+
 // app.use((req, res, next) => {
 //   console.log(req.session);
 //   next();
