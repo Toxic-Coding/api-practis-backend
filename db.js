@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 /* The connection string to the database. */
-const Uri = 'mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook';
+const Uri = process.env.MONGODB_URI;
 
 mongoose.set("strictQuery", false);
 /**

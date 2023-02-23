@@ -22,7 +22,7 @@ app.use(
 );
 
 const store = new MongoDBStore({
-  uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
+  uri: process.env.MONGODB_URI,
   collection: "mySessions",
 });
 //sessions
@@ -30,7 +30,7 @@ app.use(cookieParser());
 // Set up the Express app and session middleware
 app.use(
   session({
-    secret: "your secret key here",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   res.setHeader("Permissions-Policy", "interest-cohort=()");
   next();
 });
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 /* A middleware that parses the body of the request. */
 app.use(express.json());
