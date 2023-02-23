@@ -12,8 +12,13 @@ require("dotenv").config();
 /* Creating an instance of the express application. */
 const app = express();
 
-/* Allowing the client to access the server. */
-app.use(cors({ origin: "https://toxic-coding.github.io", credentials: true }));
+// Allow requests from your React app
+app.use(
+  cors({
+    origin: "https://toxic-coding.github.io",
+    credentials: true,
+  })
+);
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
@@ -31,9 +36,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: true,
-      domain: "github.io",
       maxAge: 3600000,
-      sameSite: "none",
     },
   })
 );
