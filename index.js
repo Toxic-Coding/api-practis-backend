@@ -11,7 +11,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
 /* Creating an instance of the express application. */
 const app = express();
-
+app.set('trust proxy', 1);
 // Allow requests from your React app
 app.use(
   cors({
