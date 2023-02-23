@@ -11,7 +11,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
 /* Creating an instance of the express application. */
 const app = express();
-app.set('trust proxy', 1);
+
 // Allow requests from your React app
 app.use(
   cors({
@@ -34,19 +34,21 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      httpOnly: true,
       secure: true,
+      httpOnly: true,
       maxAge: 3600000,
     },
   })
 );
-
 // app.use((req, res, next) => {
 //   console.log(req.session);
 //   next();
 // });
 /* Setting the port to 4000. */
 const port = 5000;
+
+/* A middleware that parses the body of the request. */
+app.use(express.json());
 
 app.use("/api/auth", require("./Routes/auth"));
 
