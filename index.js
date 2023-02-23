@@ -50,7 +50,7 @@ const port = 5000;
 /* A middleware that parses the body of the request. */
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.render("welcom to my backend we are live");
+  res.send("Welcome to my backend server!");
 });
 app.use("/api/auth", require("./Routes/auth"));
 
