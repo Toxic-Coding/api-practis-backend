@@ -49,9 +49,7 @@ const port = 5000;
 
 /* A middleware that parses the body of the request. */
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.send("Welcome to my backend server!");
-});
+
 app.use("/api/auth", require("./Routes/auth"));
 
 /* Listening to the port 4000. */
