@@ -56,7 +56,10 @@ app.use((req, res, next) => {
   req.session.lastActivity = Date.now();
   next();
 });
-
+app.use((req, res, next) => {
+  res.setHeader("Permissions-Policy", "interest-cohort=()");
+  next();
+});
 const port = 5000;
 
 /* A middleware that parses the body of the request. */
