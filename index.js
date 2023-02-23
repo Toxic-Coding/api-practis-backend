@@ -5,6 +5,7 @@ const express = require("express");
 /* Allowing the client to access the server. */
 const cors = require("cors");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 // const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
@@ -12,13 +13,14 @@ require("dotenv").config();
 const app = express();
 
 /* Allowing the client to access the server. */
-app.use(cors({ origin: "https://toxic-coding.github.io" }));
+app.use(cors({ origin: "https://toxic-coding.github.io", credentials: true }));
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://adil:wWybEYr14c5LtPCa@cluster0.wwxmokz.mongodb.net/mynotebook",
   collection: "mySessions",
 });
 //sessions
+app.use(cookieParser());
 // Set up the Express app and session middleware
 app.use(
   session({
@@ -31,7 +33,7 @@ app.use(
       httpOnly: true,
       domain: "github.io",
       maxAge: 3600000,
-      sameSite: true,
+      sameSite: "none",
     },
   })
 );
