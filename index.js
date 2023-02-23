@@ -15,7 +15,7 @@ const app = express();
 // Allow requests from your React app
 app.use(
   cors({
-    origin: "https://toxic-coding.github.io",
+    origin: ["https://toxic-coding.github.io", "http://localhost:3000"],
     credentials: true,
   })
 );
@@ -34,12 +34,22 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      secure: true,
       httpOnly: true,
       maxAge: 3600000,
     },
   })
 );
+
+app.use(function (req, res, next) {
+  if (req.secure) {
+    // request was made over HTTPS, set secure flag to true
+    req.session.cookie.secure = true;
+  } else {
+    // request was made over HTTP, set secure flag to false
+    req.session.cookie.secure = false;
+  }
+  next();
+});
 // app.use((req, res, next) => {
 //   console.log(req.session);
 //   next();
@@ -49,9 +59,9 @@ const port = 5000;
 
 /* A middleware that parses the body of the request. */
 app.use(express.json());
-app.get('/',(req,res)=>{
-  res.render('welcom to my backend we are live')
-})
+app.get("/", (req, res) => {
+  res.render("welcom to my backend we are live");
+});
 app.use("/api/auth", require("./Routes/auth"));
 
 /* Listening to the port 4000. */
