@@ -37,7 +37,7 @@ app.use(
     cookie: {
       secure: true, // set to true if your app is hosted on HTTPS
       sameSite: "none", // set to 'none' if your app is hosted on a different domain
-      maxAge: 3600000, // session expiration time in milliseconds
+      maxAge: 30000, // session expiration time in milliseconds
     },
   })
 );
