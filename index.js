@@ -15,7 +15,7 @@ const app = express();
 // Allow requests from your React app
 app.use(
   cors({
-    origin: true,
+    origin: "https://toxic-coding.github.io",
     credentials: true,
   })
 );
@@ -49,7 +49,9 @@ const port = 5000;
 
 /* A middleware that parses the body of the request. */
 app.use(express.json());
-
+app.get('/',(req,res)=>{
+  res.render('welcom to my backend we are live')
+})
 app.use("/api/auth", require("./Routes/auth"));
 
 /* Listening to the port 4000. */
