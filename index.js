@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 // Allow requests from your React app
 app.use(
   cors({
-    origin: "https://toxic-coding.github.io",
+    origin: ["https://toxic-coding.github.io", "https://apipre-e1dc8.web.app"],
     credentials: true,
   })
 );
